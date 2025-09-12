@@ -2,8 +2,7 @@ import Mongoose from "mongoose";
 
 const patientSchema = new Mongoose.Schema(
   {
-    name: { type: String, required: true },
-    password: { type: String, required: true },
+    fullName: { type: String, required: true },
     patientId: { type: String, required: true, unique: true },
     gender: { type: String, enum: ["Male", "Female", "Other"] },
     dateOfBirth: { type: Date, required: true },
@@ -42,7 +41,7 @@ const patientSchema = new Mongoose.Schema(
     ],
     progress: [
       {
-        date: { type: Date, degfault: Date.now() },
+        date: { type: Date, degfault: Date.now },
         symptomsBefore: [String],
         symptomsAfter: [String],
         practitionerNotes: String,
@@ -53,7 +52,7 @@ const patientSchema = new Mongoose.Schema(
         sessionsId: String,
         rating: { type: Number, min: 1, max: 5 },
         comments: String,
-        date: { type: Date, default: Date.now() },
+        date: { type: Date, default: Date.now },
       },
     ],
   },
@@ -63,6 +62,6 @@ const patientSchema = new Mongoose.Schema(
 );
 
 const patientModel =
-  Mongoose.models.user || Mongoose.model("patient", patientSchema);
+  Mongoose.models.patient || Mongoose.model("patient", patientSchema);
 
 export default patientModel;
