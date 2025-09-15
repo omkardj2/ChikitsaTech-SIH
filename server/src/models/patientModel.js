@@ -2,13 +2,19 @@ import Mongoose from "mongoose";
 
 const patientSchema = new Mongoose.Schema(
   {
-    fullName: { type: String, required: true },
-    patientId: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    patientId: {
+      type: String,
+      required: true,
+      unique: true,
+      default: () => `PAT-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    },
     gender: { type: String, enum: ["Male", "Female", "Other"] },
-    dateOfBirth: { type: Date, required: true },
+    dateOfBirth: { type: Date, required: true, default:Date.now },
     contact: {
       phone: { type: String, required: true },
-      email: { type: String, required: true, unique: true },
       address: {
         street: String,
         city: String,
